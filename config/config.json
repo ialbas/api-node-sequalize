@@ -1,0 +1,12 @@
+{
+  "dialect": "sqlite",
+  "username": "root",
+  "password": "root",
+  "host": "localhost",
+  "storage": "./database.sqlite",
+  "logging": "console.log",
+  "define": {
+    "timestamps": true,
+    "underscored": false
+  }
+}

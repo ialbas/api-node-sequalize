@@ -1,0 +1,52 @@
+{
+  "ok": {
+    "title": "normal",
+    "description": "outer description is provided"
+  },
+  "empty": {},
+  "--title": {
+    "description": "outer description is provided"
+  },
+  "short-title": {
+    "title": "",
+    "description": "outer description is provided"
+  },
+  "long-title": {
+    "title": "long title long title long title long title long title long title long title long title long title long title long title long title long title long title long title long title long title long title long title long title long title long title long title long title long title long title long title long title long title long title long title long title long title long title ",
+    "description": "outer description is provided"
+  },
+  "--description": {
+    "title": "normal"
+  },
+  "short-description": {
+    "title": "normal",
+    "description": ""
+  },
+  "long-description": {
+    "title": "normal",
+    "description": "long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description long description "
+  },
+  "invalid-tag": {
+    "title": "normal",
+    "description": "long description",
+    "tags": [
+      "valid_tag_one",
+      "valid_tag_two",
+      "invalid_tag"
+    ]
+  },
+  "valid-tag": {
+    "title": "normal",
+    "description": "long description",
+    "tags": [
+      "valid_tag_one",
+      "valid_tag_two",
+      "valid_tag_three"
+    ]
+  },
+  "malformed-tag": {
+    "title": "normal",
+    "description": "normal description is provided",
+    "tags": "valid_tag_one, valid_tag_two, valid_tag_three"
+  }
+}

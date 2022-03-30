@@ -1,0 +1,35 @@
+{
+  "test": {
+    "dialect": "sqlite",
+    "username": "root",
+    "password": "root",
+    "host": "localhost",
+    "storage": "./database.sqlite",
+    "define": {
+      "timestamps": true,
+      "underscored": false
+    }
+  },
+  "development": {
+    "dialect": "mssql",
+    "host": "127.0.0.1",
+    "username": "sa",
+    "password": "!Abc123456789",
+    "database": "node_sequalize",
+    "define": {
+      "timestamps": true,
+      "underscored": false
+    }
+  },
+  "production": {
+    "dialect": "mssql",
+    "host": "127.0.0.1",
+    "username": "sa",
+    "password": "!Abc123456789",
+    "database": "node_sequalize",
+    "define": {
+      "timestamps": true,
+      "underscored": false
+    }
+  }
+}
