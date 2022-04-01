@@ -3,10 +3,10 @@ const httpRequest = require('./httpRequest.json')
 
 describe('PostUseCase - CREATE POST CORRECLY', () => {
   beforeAll(async () => {
-    require('../../src/database')('test')
+    require('../../src/database')('production')
   })
   afterAll(async () => {
-    require('../../src/database')('test').close()
+    require('../../src/database')('production').close()
   })
   test('Should return Missing param and status 400 if `body` no provided, in route `create`', async () => {
     const sut = new PostRouter()
@@ -72,7 +72,16 @@ describe('PostUseCase - CREATE POST CORRECLY', () => {
   })
   test('Should return bad request and status 201 if all tags are `valid`, in route `create`', async () => {
     const sut = new PostRouter()
-    const httpResponse = await sut.create(httpRequest['valid-tag'])
+    const httpRequest = {
+      title: 'normal',
+      description: 'long description',
+      tags: [
+        'valid_tag_one',
+        'valid_tag_two',
+        'valid_tag_three'
+      ]
+    }
+    const httpResponse = await sut.create(httpRequest)
     expect(httpResponse.statusCode).toBe(201)
   })
 })

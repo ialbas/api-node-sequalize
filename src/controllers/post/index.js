@@ -26,28 +26,9 @@ class PostRouter {
    * @returns {object} new a registrer {{ id: UUID, title: string, body: string, tags: string[] }}
    */
   async update (id, body) {
-    if (!body) {
-      return HttpResponse.badRequest(body)
-    }
-    try {
-      if (!id) {
-        return HttpResponse.badRequestParam('id')
-      }
-
-      if (!validator.isUUID(id, 4)) {
-        return HttpResponse.badRequestParam('id')
-      }
-
-      const model = new Post()
-      const result = await model.update(id, body)
-      if (result.statusCode === 200) {
-        return result
-      } else {
-        return result
-      }
-    } catch (error) {
-      return HttpResponse.serverError()
-    }
+    const service = new Post()
+    const result = await service.update(id, body)
+    return result
   }
 
   /**

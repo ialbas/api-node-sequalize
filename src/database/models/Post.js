@@ -12,6 +12,7 @@ const definitions = {
 }
 class Post extends Model {
   static init (sequelize) {
+    const count = 0
     super.init(
       {
         title: {
@@ -29,7 +30,7 @@ class Post extends Model {
           }
         },
         description: {
-          type: DataTypes.STRING,
+          type: DataTypes.TEXT,
           allowNull: false,
           validate: {
             notNull: {
@@ -43,8 +44,8 @@ class Post extends Model {
           }
         },
         tags: {
-          type: DataTypes.ARRAY(DataTypes.STRING),
-          allowNull: true,
+          type: DataTypes.JSON,
+          allowNull: false,
           validate: {
             notContains: {
               args: ['invalid_tag', 'invalid_tag_outher'],

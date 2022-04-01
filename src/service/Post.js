@@ -24,7 +24,9 @@ class Post {
         id: result.id,
         title: result.title,
         description: result.description,
-        tags: result.tags
+        tags: JSON.parse(result.tags),
+        created_at: result.createdAt,
+        updated_at: result.updatedAt
       })
     } catch (e) {
       console.error(e)
@@ -32,25 +34,40 @@ class Post {
   }
 
   async update (id, post) {
-    const sanitizePost = this._sanitizeTags(post)
-    const validate = await isValid(sanitizePost)
+    if (!id) {
+      return HttpResponse.badRequest('id')
+    }
 
+    if (Object.keys(post).length <= 0) {
+      return HttpResponse.badRequest('body no provided')
+    }
+
+    const validate = await isValid(post)
     if (!validate.isValid) {
-      return HttpResponse.badRequestParam(validate.errors)
+      return HttpResponse.badRequestGenericParam(validate.errors)
     }
 
     try {
-      const find = await PostModel.findOne({ _id: id })
-      if (isValid) {
-        if (find) {
-          const result = await PostModel.updateOne({ _id: id }, post)
-          if (result.acknowledged) {
-            const current = await PostModel.find({ _id: id }, post)
-            return HttpResponse.ok(current)
-          }
-        }
-        return HttpResponse.notFound('id')
+      const find = await PostModel.findByPk(id)
+
+      if (find) {
+        const { title, description, tags } = post
+        const npost = { title, description, tags: tags?.toString() }
+
+        const build = await PostModel.build(npost)
+        const result = await build.save()
+        console.log('**********************', result)
+        return HttpResponse.ok({
+          id: result.id,
+          title: result.title,
+          description: result.description,
+          tags: result.tags,
+          created_at: result.createdAt,
+          updated_at: result.updatedAt
+        })
       }
+
+      return HttpResponse.notFound(`the resource '${id}' not found`)
     } catch (e) {
       console.error(e)
     }
