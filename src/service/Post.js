@@ -51,17 +51,13 @@ class Post {
       const find = await PostModel.findByPk(id)
 
       if (find) {
-        const { title, description, tags } = post
-        const npost = { title, description, tags: tags?.toString() }
+        const result = await PostModel.create(post)
 
-        const build = await PostModel.build(npost)
-        const result = await build.save()
-        console.log('**********************', result)
-        return HttpResponse.ok({
+        return HttpResponse.created({
           id: result.id,
           title: result.title,
           description: result.description,
-          tags: result.tags,
+          tags: JSON.parse(result.tags),
           created_at: result.createdAt,
           updated_at: result.updatedAt
         })
