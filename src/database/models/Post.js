@@ -45,17 +45,17 @@ class Post extends Model {
         },
         tags: {
           type: DataTypes.JSON,
-          allowNull: false,
+          allowNull: true,
           validate: {
             notContains: {
               args: ['invalid_tag', 'invalid_tag_outher'],
               msg: 'There are  any invalid tag'
             },
             customTagValidate (tags) {
-              if (Array.isArray(tags)) {
-                return tags.join(',')
-              } else {
-                throw new Error('the field `tags` has malformed, only array is allowed')
+              if (tags) {
+                if (!Array.isArray(tags)) {
+                  throw new Error('the field `tags` has malformed, only array is allowed')
+                }
               }
             }
           }
