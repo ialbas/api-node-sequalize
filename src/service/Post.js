@@ -1,4 +1,5 @@
 const PostModel = require('../database/models/Post')
+const validator = require('validator')
 const HttpResponse = require('../helpers/http-response')
 const isValid = require('./postValidation')
 
@@ -34,14 +35,13 @@ class Post {
   }
 
   async update (id, post) {
-    if (!id) {
-      return HttpResponse.badRequest('id')
-    }
-
     if (Object.keys(post).length <= 0) {
       return HttpResponse.badRequest('body no provided')
     }
 
+    if (!validator.isUUID(id)) {
+      return HttpResponse.badRequest('id no has valid UUID')
+    }
     const validate = await isValid(post)
     if (!validate.isValid) {
       return HttpResponse.badRequestGenericParam(validate.errors)
@@ -53,7 +53,7 @@ class Post {
       if (find) {
         const result = await PostModel.create(post)
 
-        return HttpResponse.created({
+        return HttpResponse.ok({
           id: result.id,
           title: result.title,
           description: result.description,

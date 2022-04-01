@@ -26,6 +26,9 @@ class PostRouter {
    * @returns {object} new a registrer {{ id: UUID, title: string, body: string, tags: string[] }}
    */
   async update (id, body) {
+    if (!id) {
+      return HttpResponse.badRequest('id')
+    }
     const service = new Post()
     const result = await service.update(id, body)
     return result
