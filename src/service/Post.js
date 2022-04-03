@@ -92,13 +92,16 @@ class Post {
   }
 
   async remove (id) {
+    if (!validator.isUUID(id)) {
+      return HttpResponse.badRequest('id no has valid UUID')
+    }
     try {
-      const find = await PostModel.findOne({ _id: id })
+      const find = await PostModel.findByPk(id)
       if (find) {
-        const remove = await PostModel.deleteOne({ _id: id })
+        const remove = await PostModel.destroy({ where: { id: id } })
 
         if (remove) {
-          return HttpResponse.ok(remove)
+          return HttpResponse.noContent(remove)
         }
       }
       return HttpResponse.notFound('id')

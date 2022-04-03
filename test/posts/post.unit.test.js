@@ -188,19 +188,38 @@ describe('PostUseCase - CREATE POST CORRECLY', () => {
   test('Should return bad request and status 400 if ID UUDI is no valid, in route `getById`', async () => {
     const sut = new PostRouter()
     const id = 'any_id'
-    const httpResponse = await sut.getById(id, httpRequest['valid-tag'])
+    const httpResponse = await sut.getById(id)
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.error.name).toContain('Missing param: id no has valid UUID')
   })
-  test('Should return bad request and status 400 if ID UUDI is no valid, in route `getById`', async () => {
+  test('Should return bad request and status 400 if ID UUDI is null, in route `getById`', async () => {
     const sut = new PostRouter()
-    const httpResponse = await sut.getById(null, httpRequest['valid-tag'])
+    const httpResponse = await sut.getById(null)
     expect(httpResponse.statusCode).toBe(400)
-    expect(httpResponse.error.name).toContain('Missing param: id no has valid UUID')
+    expect(httpResponse.error.name).toContain('Missing param: id')
   })
   test('Should return bad request and status 200 if ID UUDI is valid, in route `getById`', async () => {
     const sut = new PostRouter()
-    const httpResponse = await sut.getById(id, httpRequest['valid-tag'])
+    const httpResponse = await sut.getById(id)
     expect(httpResponse.statusCode).toBe(200)
+  })
+  test('Should return bad request and status 400 if ID UUDI is no valid, in route `remove`', async () => {
+    const sut = new PostRouter()
+    const id = 'any_id'
+    const httpResponse = await sut.remove(id)
+    expect(httpResponse.statusCode).toBe(400)
+    expect(httpResponse.error.name).toContain('Missing param: id no has valid UUID')
+  })
+  test('Should return bad request and status 400 if ID UUDI is null, in route `remove`', async () => {
+    const sut = new PostRouter()
+    const httpResponse = await sut.remove(null)
+    expect(httpResponse.statusCode).toBe(400)
+    expect(httpResponse.error.name).toContain('Missing param: id')
+  })
+  test('Should return bad request and status 200 if ID UUDI is valid, in route `remove`', async () => {
+    const sut = new PostRouter()
+    const httpResponse = await sut.remove(id)
+    console.log(httpResponse)
+    expect(httpResponse.statusCode).toBe(204)
   })
 })
