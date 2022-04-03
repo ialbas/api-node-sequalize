@@ -70,12 +70,22 @@ class Post {
   }
 
   async getById (id) {
+    if (!validator.isUUID(id)) {
+      return HttpResponse.badRequest('id no has valid UUID')
+    }
     try {
-      const find = await PostModel.findOne({ _id: id })
-      if (find) {
-        return HttpResponse.ok(find)
+      const result = await PostModel.findByPk(id)
+      if (result) {
+        return HttpResponse.ok({
+          id: result.id,
+          title: result.title,
+          description: result.description,
+          tags: JSON.parse(result.tags),
+          created_at: result.createdAt,
+          updated_at: result.updatedAt
+        })
       }
-      return HttpResponse.notFound('id')
+      return HttpResponse.notFound(`the resource '${id}' not found`)
     } catch (e) {
       console.error(e)
     }

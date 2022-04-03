@@ -160,16 +160,14 @@ describe('PostUseCase - CREATE POST CORRECLY', () => {
     const sut = new PostRouter()
     const id = 'any_id'
     const httpResponse = await sut.update(id, httpRequest['valid-tag'])
-    console.log(httpResponse)
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.error.name).toContain('Missing param: id no has valid UUID')
   })
 
   test('Should return not found and status 404 if not exists, in route `update`', async () => {
     const sut = new PostRouter()
-    const id = '3ea9c08d-824c-4bdf-995f-5456ed103a7a'
+    const id = '3ea9c08d-824c-4bdf-995f-1456ed103a7a'
     const httpResponse = await sut.update(id, httpRequest['valid-tag'])
-    console.log(httpResponse)
     expect(httpResponse.statusCode).toBe(404)
     expect(httpResponse.error.name).toContain(`the resource '${id}' not found`)
   })
@@ -185,6 +183,24 @@ describe('PostUseCase - CREATE POST CORRECLY', () => {
       ]
     }
     const httpResponse = await sut.update(id, httpRequest)
+    expect(httpResponse.statusCode).toBe(200)
+  })
+  test('Should return bad request and status 400 if ID UUDI is no valid, in route `getById`', async () => {
+    const sut = new PostRouter()
+    const id = 'any_id'
+    const httpResponse = await sut.getById(id, httpRequest['valid-tag'])
+    expect(httpResponse.statusCode).toBe(400)
+    expect(httpResponse.error.name).toContain('Missing param: id no has valid UUID')
+  })
+  test('Should return bad request and status 400 if ID UUDI is no valid, in route `getById`', async () => {
+    const sut = new PostRouter()
+    const httpResponse = await sut.getById(null, httpRequest['valid-tag'])
+    expect(httpResponse.statusCode).toBe(400)
+    expect(httpResponse.error.name).toContain('Missing param: id no has valid UUID')
+  })
+  test('Should return bad request and status 200 if ID UUDI is valid, in route `getById`', async () => {
+    const sut = new PostRouter()
+    const httpResponse = await sut.getById(id, httpRequest['valid-tag'])
     expect(httpResponse.statusCode).toBe(200)
   })
 })

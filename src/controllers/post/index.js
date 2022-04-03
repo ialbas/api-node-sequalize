@@ -42,20 +42,12 @@ class PostRouter {
    * @returns {object} {{ id: UUID, title: string, body: string, tags: string[] }}
    */
   async getById (id) {
-    try {
-      if (!id || !validate(id, 4)) {
-        return HttpResponse.badRequest('id')
-      }
-      const model = new Post()
-      const result = await model.getById(id)
-
-      if (result.statusCode === 200) {
-        return result
-      }
-      return result
-    } catch (error) {
-      return HttpResponse.serverError()
+    if (!id) {
+      return HttpResponse.badRequest('id')
     }
+    const service = new Post()
+    const result = await service.getById(id)
+    return result
   }
 
   /**
