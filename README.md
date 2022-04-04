@@ -7,7 +7,7 @@
 
 ![Backend API Rest NodeJs, Jest, JWT](capa_test_node_api.png)
 
-## A simple project example with Node, Jest, JWT, Mongoose and outher resources.
+## A simple project example with Node, Jest, JWT, Sequelize and outher resources.
 
 ## Sumary
 
@@ -27,7 +27,7 @@ Requeriments and Instructions
 2. To see Tests and Coverage `npm run test`
 3. Initialize this server `npm run start`
 4. For data persistence set your string connection in file `.env` do like the example in file `.env-local`
-6. For `Postman` there are `collections` with all routes and `envioriments` to apply in your postman console. See more in folder ./postman
+5. For `Postman` there are `collections` with all routes and `envioriments` to apply in your postman console. See more in folder ./postman
 
 ## Features
 
@@ -42,6 +42,7 @@ This API allows running basic CRUD with `sql server` and authenticating routes w
 - Using `Lint Staged`
 - Using `Husky` hooks to pre-commits and push to repository
 - Using JWT for Routes Authentication
+- Using Database [SQL Server](https://www.microsoft.com/pt-br/sql-server/sql-server-2019)
 - Using `ValidatorJs` for Process and validate of body, see below:
 
 ```bash
@@ -639,6 +640,7 @@ You can import also this `request` for your integration testes in [colletion](./
 - [Standard Javascript Style](https://standardjs.com/)
 - [Nodemon](https://github.com/remy/nodemon)
 - [JWT](https://jwt.io/)
+- [Sequelize](https://sequelize.org/)
 - [Postman](https://www.postman.com/)
 - [Github Actions](https://docs.github.com/pt/actions)
 - [Docker](https://docs.docker.com/get-started/)

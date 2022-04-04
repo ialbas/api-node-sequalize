@@ -74,6 +74,7 @@ describe('PostUseCase - CREATE POST CORRECLY', () => {
   })
   test('Should return bad request and status 201 if all tags are `valid`, in route `create`', async () => {
     const sut = new PostRouter()
+
     const httpRequest = {
       title: 'normal',
       description: 'long description',
@@ -219,7 +220,56 @@ describe('PostUseCase - CREATE POST CORRECLY', () => {
   test('Should return bad request and status 200 if ID UUDI is valid, in route `remove`', async () => {
     const sut = new PostRouter()
     const httpResponse = await sut.remove(id)
-    console.log(httpResponse)
     expect(httpResponse.statusCode).toBe(204)
+  })
+  test('Should return 500 if `page` and `size` is no provided, in route `getAll`', async () => {
+    const sut = new PostRouter()
+    const httpResponse = await sut.getAll()
+    expect(httpResponse.statusCode).toBe(500)
+  })
+  test('Should return 400 if `page`  is no provided, in route `getAll`', async () => {
+    const sut = new PostRouter()
+    const size = 5
+    const httpResponse = await sut.getAll(null, size)
+    expect(httpResponse.statusCode).toBe(400)
+    expect(httpResponse.error.name).toContain('Missing param: page')
+  })
+  test('Should return 400 if `size`  is no provided, in route `getAll`', async () => {
+    const sut = new PostRouter()
+    const page = 5
+    const httpResponse = await sut.getAll(page, null)
+    expect(httpResponse.statusCode).toBe(400)
+    expect(httpResponse.error.name).toContain('Missing param: size')
+  })
+  test('Should return 400 if `size` is integer > 0 and `page is NaN`, in route `getAll`', async () => {
+    const sut = new PostRouter()
+    const page = 'any_not_number'
+    const size = 5
+    const httpResponse = await sut.getAll(page, size)
+    expect(httpResponse.statusCode).toBe(400)
+    expect(httpResponse.error.name).toContain('Missing param: page')
+  })
+  test('Should return 400 if `page` is integer > 0 and `size is NaN`, in route `getAll`', async () => {
+    const sut = new PostRouter()
+    const page = 5
+    const size = 'any_not_number'
+    const httpResponse = await sut.getAll(page, size)
+    expect(httpResponse.statusCode).toBe(400)
+    expect(httpResponse.error.name).toContain('Missing param: size')
+  })
+  test('Should return 404 if not have register, in route `getAll`', async () => {
+    const sut = new PostRouter()
+    const page = 300
+    const size = 3000
+    const httpResponse = await sut.getAll(page, size)
+    expect(httpResponse.statusCode).toBe(404)
+    expect(httpResponse.error.name).toContain('ResourceNotFound: not found results')
+  })
+  test('Should return bad request and status 200 if page and size is valid, in route `getAll`', async () => {
+    const sut = new PostRouter()
+    const page = 2
+    const size = 10
+    const httpResponse = await sut.getAll(page, size)
+    expect(httpResponse.statusCode).toBe(200)
   })
 })

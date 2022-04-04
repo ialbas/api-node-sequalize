@@ -2,6 +2,7 @@ const PostModel = require('../database/models/Post')
 const validator = require('validator')
 const HttpResponse = require('../helpers/http-response')
 const isValid = require('./postValidation')
+const { id } = require('tedious/lib/data-types/null')
 
 class Post {
   constructor (httpResquest) {
@@ -112,27 +113,35 @@ class Post {
 
   async getAll (page, size) {
     try {
-      const offset = size * (page - 1)
+      const offset = size * (parseInt(page) - 1)
       const options = {
-        sort: { date: -1 },
-        select: 'title body tags',
-        lean: false,
         offset,
-        limit: size
+        limit: parseInt(size),
+        raw: true,
+        attributes: ['id', 'title', 'description', 'tags', ['createdAt', 'created_at'], ['updatedAt', 'updated_at']],
+        order: [
+          ['createdAt', 'DESC']
+        ]
       }
 
-      const result = await PostModel.paginate(
-        {},
-        options,
-        async (_err, res) => {
-          return await res
-        }
-      )
-      if (result.docs.length > 0) {
-        return HttpResponse.ok(result)
+      const result = await PostModel.findAndCountAll(options)
+
+      if (result.rows.length > 0) {
+        return HttpResponse.ok({
+
+          rows: result.rows.map(data => {
+            if (data.tags) {
+              data.tags = JSON.parse(data.tags)
+            }
+            return data
+          }),
+          total: result.count,
+          limit: options.limit,
+          offset: options.offset
+        })
       }
 
-      return HttpResponse.notFound('page or size')
+      return HttpResponse.notFound('not found results')
     } catch (e) {
       console.error(e)
     }

@@ -75,12 +75,8 @@ class PostRouter {
       if (!parseInt(size) > 0) {
         return HttpResponse.badRequest('size')
       }
-      const model = new Post()
-      const result = await model.getAll(parseInt(page), parseInt(size))
-
-      if (result.statusCode === 200) {
-        return result
-      }
+      const service = new Post()
+      const result = await service.getAll(page, size)
       return result
     } catch (error) {
       return HttpResponse.serverError()
