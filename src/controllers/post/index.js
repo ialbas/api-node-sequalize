@@ -1,5 +1,3 @@
-const validator = require('validator')
-
 const Post = require('../../service/Post')
 const HttpResponse = require('../../helpers/http-response')
 

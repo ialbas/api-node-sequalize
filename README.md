@@ -5,7 +5,7 @@
 
 ## Backend API Rest NodeJs with Tests Sequelize
 
-![Backend API Rest NodeJs, Jest, JWT](capa_test_node_api.png)
+![Backend API Rest NodeJs, Jest, JWT](./capa_test_node_api.jpg)
 
 ## A simple project example with Node, Jest, JWT, Sequelize and outher resources.
 

@@ -31,7 +31,6 @@ class Post {
       })
     } catch (e) {
       console.error(e)
-      return HttpResponse.serverError()
     }
   }
 

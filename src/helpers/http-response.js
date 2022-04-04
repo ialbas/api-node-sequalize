@@ -1,6 +1,5 @@
 const MissingParamError = require('./missing-param-error')
 const UnauthorizedError = require('./unauthorized-error')
-const UnsupportedParamError = require('./unsupported-param')
 const ResourceNotFound = require('./resource-not-found')
 const ServerError = require('./server-error')
 const GenericMessageError = require('./generic-message-error')
@@ -35,14 +34,6 @@ module.exports = class HttpResponse {
       statusCode: 400,
       description: 'bad request',
       error: new MissingParamError(paramName)
-    }
-  }
-
-  static badRequestParam (paramName) {
-    return {
-      statusCode: 400,
-      description: 'bad request',
-      error: new UnsupportedParamError(paramName)
     }
   }
 
