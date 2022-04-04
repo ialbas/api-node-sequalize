@@ -1,4 +1,3 @@
-/*
 const EmailValidator = require('../../src/helpers/email-validator')
 const MissingParamError = require('../../src/helpers/missing-param-error')
 const TokenHelper = require('../../src/helpers/token-helper')
@@ -115,4 +114,3 @@ describe('Auth Router - Ensure that the route `login` work correcly', () => {
     expect(accessToken.data.accessToken).toEqual(validToken)
   })
 })
-*/

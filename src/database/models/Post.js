@@ -12,7 +12,6 @@ const definitions = {
 }
 class Post extends Model {
   static init (sequelize) {
-    const count = 0
     super.init(
       {
         title: {

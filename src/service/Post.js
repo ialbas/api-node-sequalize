@@ -2,7 +2,6 @@ const PostModel = require('../database/models/Post')
 const validator = require('validator')
 const HttpResponse = require('../helpers/http-response')
 const isValid = require('./postValidation')
-const { id } = require('tedious/lib/data-types/null')
 
 class Post {
   constructor (httpResquest) {
@@ -32,6 +31,7 @@ class Post {
       })
     } catch (e) {
       console.error(e)
+      return HttpResponse.serverError()
     }
   }
 

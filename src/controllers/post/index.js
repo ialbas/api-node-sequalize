@@ -59,28 +59,24 @@ class PostRouter {
    * @returns list of Post [{ id: UUID, title: string, body: string, tags: string[] }]
    */
   async getAll (page, size) {
-    try {
-      if (!page && !size) {
-        return HttpResponse.serverError()
-      }
-      if (!page && size) {
-        return HttpResponse.badRequest('page')
-      }
-      if (page && !size) {
-        return HttpResponse.badRequest('size')
-      }
-      if (!parseInt(page) > 0) {
-        return HttpResponse.badRequest('page')
-      }
-      if (!parseInt(size) > 0) {
-        return HttpResponse.badRequest('size')
-      }
-      const service = new Post()
-      const result = await service.getAll(page, size)
-      return result
-    } catch (error) {
+    if (!page && !size) {
       return HttpResponse.serverError()
     }
+    if (!page && size) {
+      return HttpResponse.badRequest('page')
+    }
+    if (page && !size) {
+      return HttpResponse.badRequest('size')
+    }
+    if (!parseInt(page) > 0) {
+      return HttpResponse.badRequest('page')
+    }
+    if (!parseInt(size) > 0) {
+      return HttpResponse.badRequest('size')
+    }
+    const service = new Post()
+    const result = await service.getAll(page, size)
+    return result
   }
 
   /**

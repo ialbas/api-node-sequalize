@@ -2,7 +2,7 @@ require('dotenv').config()
 const HttpResponse = require('../../helpers/http-response')
 const Encripter = require('../../helpers/encrypter')
 const TokenHelper = require('../../helpers/token-helper')
-const User = require('../../models_old/user')
+const User = require('../../database/models/User')
 
 class AuthRouter {
   async auth (email, password) {

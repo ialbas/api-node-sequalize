@@ -1,4 +1,4 @@
-/*
+
 require('dotenv').config()
 const Encrypter = require('../../src/helpers/encrypter')
 const TokenHelper = require('../../src/helpers/token-helper')
@@ -71,4 +71,3 @@ describe('Ensure works of TokenValidator', () => {
   })
 })
 
-*/
