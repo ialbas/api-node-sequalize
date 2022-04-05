@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node ./src/app.js",
     "local": "nodemon ./src/app.js",
+    "swagger-autogen": "node ./src/swagger.js",
     "test": "jest",
     "test:silent": "jest --passWithNoTests --colors --silent --verbose",
     "test:watch": "npm test -- --watch",
@@ -46,6 +47,8 @@
     "express": "^4.17.3",
     "jsonwebtoken": "^8.5.1",
     "sequelize": "^6.17.0",
+    "swagger-autogen": "^2.20.8",
+    "swagger-ui-express": "^4.3.0",
     "tedious": "^14.4.0",
     "uuid": "^8.3.2",
     "validator": "^13.7.0"

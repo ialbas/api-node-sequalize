@@ -3,6 +3,9 @@ const Auth = require('../controllers/auth')
 const HttpResponse = require('../helpers/http-response')
 const TokenHelper = require('../helpers/token-helper')
 
+const swaggerUi = require('swagger-ui-express')
+const swaggerDocument = require('../docs/swagger.json')
+
 // Post Routes
 const PostController = new Post()
 const AuthController = new Auth()
@@ -82,5 +85,4 @@ class Handler {
     return next
   }
 }
-
 module.exports = Handler

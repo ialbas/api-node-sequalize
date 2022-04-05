@@ -1,0 +1,83 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Node Sequelize",
+    "description": "A simple project example with node, tests and sequalize orm"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Post",
+      "description": "Endpoints",
+      "externalDocs": {
+        "description": "More details",
+        "url": "https://github.com/ialbas/api-node-sequalize"
+      }
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "apiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "X-API-KEY",
+      "description": "any description..."
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/posts": {
+      "post": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      },
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/api/posts/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      },
+      "put": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      },
+      "delete": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/api/docs": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    }
+  }
+}
