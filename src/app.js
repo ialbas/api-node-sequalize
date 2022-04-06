@@ -8,7 +8,7 @@ const app = express()
 
 app.use(cors())
 app.use(express.json())
-routes(app)
+app.use(routes)
 
 require('./database')(process.env.TYPE_DATABSE_USAGE || 'production')
 

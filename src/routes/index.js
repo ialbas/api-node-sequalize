@@ -1,38 +1,15 @@
-const HandlerHttp = require('./handlerHttp')
-
 const swaggerUi = require('swagger-ui-express')
 const swaggerDocument = require('../docs/swagger.json')
+const express = require('express')
+const router = express.Router()
+const baseRoutes = require('./baseRoutes')
 
-module.exports = (router) => {
-  // Post router
-  const {
-    HandlerGetByID,
-    HandlerGetAll,
-    HandlerRemove,
-    HandlerCreate,
-    HandlerUpdate,
-    HandlerLogin,
-    authTokenVerify
-  } = new HandlerHttp()
+router.use(baseRoutes)
 
-  // Route Post With Authorization
-  router.post('/api/posts', authTokenVerify, HandlerCreate)
-  router.get('/api/posts', authTokenVerify, HandlerGetAll)
-  router.get('/api/posts/:id', authTokenVerify, HandlerGetByID)
-  router.put('/api/posts/:id', authTokenVerify, HandlerUpdate)
-  router.delete('/api/posts/:id', authTokenVerify, HandlerRemove)
+const swaggerUiServer = swaggerUi.serve
+const swaggerPage = swaggerUi.setup(swaggerDocument)
 
-  // Route Auth Open
-  router.post('/api/auth/login', HandlerLogin)
+router.use('/api/docs', swaggerUiServer)
+router.get('/api/docs', swaggerPage)
 
-  /*
-  * Routes
-  * Swagger Documentation Routes
-  * Server Swagger Documentation swaggerUiServer, swaggerPage
-  */
-  const swaggerUiServer = swaggerUi.serve
-  const swaggerPage = swaggerUi.setup(swaggerDocument)
-
-  router.use('/api/docs', swaggerUiServer)
-  router.get('/api/docs', swaggerPage)
-}
+module.exports = router

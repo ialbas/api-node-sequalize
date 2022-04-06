@@ -1,82 +1,267 @@
 {
-  "swagger": "2.0",
+  "openapi": "3.0.0",
   "info": {
     "version": "1.0.0",
     "title": "Node Sequelize",
     "description": "A simple project example with node, tests and sequalize orm"
   },
-  "host": "localhost:3000",
-  "basePath": "/",
+  "servers": [
+    {
+      "url": "http://localhost:3000/"
+    },
+    {
+      "url": "https://localhost:3000/"
+    }
+  ],
   "tags": [
     {
+      "name": "Login",
+      "description": "Login endpoit of the application",
+      "externalDocs": {
+        "description": "More details",
+        "url": "https://github.com/ialbas/api-node-sequalize"
+      }
+    },
+    {
       "name": "Post",
-      "description": "Endpoints",
+      "description": "Principal endpoits of the application",
       "externalDocs": {
         "description": "More details",
         "url": "https://github.com/ialbas/api-node-sequalize"
       }
     }
   ],
-  "schemes": [
-    "http",
-    "https"
-  ],
-  "securityDefinitions": {
-    "apiKeyAuth": {
-      "type": "apiKey",
-      "in": "header",
-      "name": "X-API-KEY",
-      "description": "any description..."
-    }
-  },
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
   "paths": {
-    "/api/posts": {
+    "/api/auth/login": {
       "post": {
-        "description": "",
+        "tags": [
+          "Login"
+        ],
+        "description": "Login EndPoint",
         "parameters": [],
-        "responses": {}
-      },
+        "responses": {},
+        "requestBody": {
+          "required": true,
+          "description": "Signin",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/posts": {
       "get": {
-        "description": "",
+        "tags": [
+          "Post"
+        ],
+        "description": "Get All EndPoint",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {},
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Post"
+        ],
+        "description": "Create EndPoint",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [],
-        "responses": {}
+        "responses": {},
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Create a new post",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddPost"
+              }
+            }
+          }
+        }
       }
     },
     "/api/posts/{id}": {
       "get": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
+        "tags": [
+          "Post"
+        ],
+        "description": "Get By ID EndPoint",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {},
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
       },
       "put": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
+        "tags": [
+          "Post"
+        ],
+        "description": "Update EndPoint",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {},
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Update a post",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddPost"
+              }
+            }
+          }
+        }
       },
       "delete": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
+        "tags": [
+          "Post"
+        ],
+        "description": "Remove EndPoint",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {},
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Post": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "fea2ce02-4417-4453-83d6-a919990610a8"
+          },
+          "title": {
+            "type": "string",
+            "example": "any_title"
+          },
+          "description": {
+            "type": "string",
+            "example": "any_valid_description"
+          },
+          "tags": {
+            "type": "array",
+            "example": [
+              "valid_one",
+              "valid_two"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "AddPost": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "any_title"
+          },
+          "description": {
+            "type": "string",
+            "example": "any_valid_description"
+          },
+          "tags": {
+            "type": "array",
+            "example": [
+              "valid_one",
+              "valid_two"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Login": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "any_valid_email@email.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "any_valid_password"
+          }
+        }
       }
     },
-    "/api/auth/login": {
-      "post": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
-      }
-    },
-    "/api/docs": {
-      "get": {
-        "description": "",
-        "parameters": [],
-        "responses": {}
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "authorization",
+        "description": "Please write the word Bearer before correcly token."
       }
     }
   }
