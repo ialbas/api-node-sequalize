@@ -71,3 +71,19 @@ describe('Ensure works of TokenValidator', () => {
   })
 })
 
+describe('TEST Database Connection', () => {
+  let sec
+  beforeAll(async () => {
+    sec = require('../../src/database')('production')
+  })
+  afterAll(async () => {
+    sec.close()
+  })
+  test('Should error if connection failure', async () => {
+    expect(sec.close()).rejects.toThrow(new Error())
+  })
+  test('Should error if connection failure', async () => {
+    const conn = sec.authenticate()
+    expect(conn).rejects.toThrow(new Error('ConnectionManager.getConnection was called after the connection manager was closed!'))
+  })
+})

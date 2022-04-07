@@ -31,6 +31,7 @@ class Post {
       })
     } catch (e) {
       console.error(e)
+      return HttpResponse.serverError()
     }
   }
 
@@ -49,23 +50,21 @@ class Post {
 
     try {
       const find = await PostModel.findByPk(id)
-
-      if (find) {
-        const result = await PostModel.create(post)
-
-        return HttpResponse.ok({
-          id: result.id,
-          title: result.title,
-          description: result.description,
-          tags: JSON.parse(result.tags),
-          created_at: result.createdAt,
-          updated_at: result.updatedAt
-        })
+      if (!find) {
+        return HttpResponse.notFound(`the resource '${id}' not found`)
       }
-
-      return HttpResponse.notFound(`the resource '${id}' not found`)
+      const result = await PostModel.create(post)
+      return HttpResponse.ok({
+        id: result.id,
+        title: result.title,
+        description: result.description,
+        tags: JSON.parse(result.tags),
+        created_at: result.createdAt,
+        updated_at: result.updatedAt
+      })
     } catch (e) {
       console.error(e)
+      return HttpResponse.serverError()
     }
   }
 
@@ -88,6 +87,7 @@ class Post {
       return HttpResponse.notFound(`the resource '${id}' not found`)
     } catch (e) {
       console.error(e)
+      return HttpResponse.serverError()
     }
   }
 
@@ -107,6 +107,7 @@ class Post {
       return HttpResponse.notFound('id')
     } catch (e) {
       console.error(e)
+      return HttpResponse.serverError()
     }
   }
 
@@ -143,6 +144,7 @@ class Post {
       return HttpResponse.notFound('not found results')
     } catch (e) {
       console.error(e)
+      return HttpResponse.serverError()
     }
   }
 }
