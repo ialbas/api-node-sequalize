@@ -63,15 +63,19 @@
           {
             "name": "page",
             "in": "query",
+            "description": "Required number of page",
+            "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           },
           {
             "name": "size",
             "in": "query",
+            "description": "Required number of size",
+            "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
@@ -87,9 +91,6 @@
           "Post"
         ],
         "description": "Create EndPoint",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [],
         "responses": {},
         "security": [

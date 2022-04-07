@@ -1,47 +1,27 @@
-
 const express = require('express')
-const authorize = require('../middlewares/authorize')
 const Post = require('../controllers/post')
-const Auth = require('../controllers/auth')
+const authorize = require('../middlewares/authorize')
 
-// Post Routes
 const PostController = new Post()
-const AuthController = new Auth()
 
 const router = express.Router()
 
-// Open routes
-router.post('/api/auth/login', async (req, res) => {
-  /*
-      #swagger.tags = ['Login']
-      #swagger.description = 'Login EndPoint
-       #swagger.requestBody = {
-           required: true,
-            description: 'Signin',
-            content: {
-                "application/json": {
-                        schema: {
-                            $ref: "#/definitions/Login"
-                        }
-                }
-            }
-      }
-
-  */
-  const httpResponse = await AuthController.auth(
-
-    req.body.email,
-    req.body.password
-  )
-
-  res.status(httpResponse.statusCode).json(httpResponse)
-})
-
-// Close routes
 router.get('/api/posts', authorize, async (req, res) => {
   /*
       #swagger.tags = ['Post']
       #swagger.description = 'Get All EndPoint
+      #swagger.parameters[page] = {
+            in: 'query',
+            type: 'integer',
+            description: 'Required number of page',
+            required: true
+      }
+      #swagger.parameters[size] = {
+            in: 'query',
+            type: 'integer',
+            description: 'Required number of size',
+            required: true
+      }
       #swagger.security = [{
       "apiKeyAuth": []
     }]
@@ -54,7 +34,6 @@ router.get('/api/posts', authorize, async (req, res) => {
 })
 
 router.post('/api/posts', authorize, async (req, res) => {
-  res.setHeader('Content-Type', 'application/json')
   /*
       #swagger.tags = ['Post']
       #swagger.description = 'Create EndPoint

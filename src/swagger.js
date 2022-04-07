@@ -55,7 +55,7 @@ const doc = {
 }
 
 const outputFile = './src/docs/swagger.json'
-const endpointsFiles = ['./src/routes/baseRoutes.js']
+const endpointsFiles = ['./src/routes/appRoutes.js']
 
 const options = {
   openapi: '3.0.0'
