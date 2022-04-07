@@ -125,10 +125,17 @@ class Post {
       }
 
       const result = await PostModel.findAndCountAll(options)
+      if (result.rows.length === 0) {
+        return HttpResponse.ok({
+          rows: result.rows,
+          total: result.count,
+          limit: options.limit,
+          offset: options.offset
+        })
+      }
 
       if (result.rows.length > 0) {
         return HttpResponse.ok({
-
           rows: result.rows.map(data => {
             if (data.tags) {
               data.tags = JSON.parse(data.tags)
@@ -140,8 +147,6 @@ class Post {
           offset: options.offset
         })
       }
-
-      return HttpResponse.notFound('not found results')
     } catch (e) {
       console.error(e)
       return HttpResponse.serverError()

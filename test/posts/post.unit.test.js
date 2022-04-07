@@ -341,12 +341,13 @@ describe.only('PostUseCase - CREATE POST CORRECLY', () => {
   })
   test('Should return 404 if not have register, in route `getAll`', async () => {
     const sut = new PostRouter()
-    const page = 300
-    const size = 3000
+    const page = 3000000000
+    const size = 3000000000
     const httpResponse = await sut.getAll(page, size)
     if (connect) {
-      expect(httpResponse.statusCode).toBe(404)
-      expect(httpResponse.error.name).toContain('ResourceNotFound: not found results')
+      expect(httpResponse.statusCode).toBe(200)
+      expect(httpResponse.data.limit).toBe(3000000000)
+      expect(httpResponse.data.offset).toBe(8999999997000000000)
     } else {
       expect(httpResponse.statusCode).toBe(500)
     }

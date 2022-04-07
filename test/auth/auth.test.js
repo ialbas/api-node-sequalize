@@ -63,13 +63,13 @@ const makeSut = () => {
 }
 
 describe('Auth Router - Ensure that the route `login` work correcly', () => {
-  test('Should throw if no `email` is provided', async () => {
+  test('Should bad request if no `email` is provided', async () => {
     const { sut } = makeSut()
     const auth = await sut.auth()
     expect(auth.statusCode).toBe(400)
   })
 
-  test('Should throw if no `password` is provided', async () => {
+  test('Should bad request if no `password` is provided', async () => {
     const { sut } = makeSut()
     const auth = await sut.auth('any_email@mail.com')
     expect(auth.statusCode).toBe(400)

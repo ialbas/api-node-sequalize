@@ -1,11 +1,15 @@
 const PostModel = require('../database/models/Post')
 const validateBody = async (body) => {
+  const validate = { isValid: true, errors: null }
   try {
     const result = PostModel.build(body)
     await result.validate()
-    return { isValid: true, errors: null }
+    return validate
   } catch (e) {
-    return { isValid: false, errors: e.message.replace('\n', ' ') }
+    const msg = e.message.split('\n')
+    validate.isValid = false
+    validate.errors = msg[0]
+    return validate
   }
 }
 

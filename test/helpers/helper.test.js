@@ -80,7 +80,7 @@ describe('TEST Database Connection', () => {
     sec.close()
   })
   test('Should error if connection failure', async () => {
-    expect(sec.close()).rejects.toThrow(new Error())
+    expect(sec.close()).resolves.toBe(undefined)
   })
   test('Should error if connection failure', async () => {
     const conn = sec.authenticate()
