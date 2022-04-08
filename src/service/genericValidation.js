@@ -1,8 +1,8 @@
-const PostModel = require('../database/models/Post')
-const validateBody = async (body) => {
+
+const genericValidation = async (body, model) => {
   const validate = { isValid: true, errors: null }
   try {
-    const result = PostModel.build(body)
+    const result = model.build(body)
     await result.validate()
     return validate
   } catch (e) {
@@ -13,4 +13,4 @@ const validateBody = async (body) => {
   }
 }
 
-module.exports = validateBody
+module.exports = genericValidation

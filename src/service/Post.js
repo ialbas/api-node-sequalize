@@ -1,7 +1,7 @@
 const PostModel = require('../database/models/Post')
 const validator = require('validator')
 const HttpResponse = require('../helpers/http-response')
-const isValid = require('./postValidation')
+const genericValidation = require('./genericValidation')
 
 class Post {
   constructor (httpResquest) {
@@ -13,7 +13,7 @@ class Post {
       return HttpResponse.badRequest('body no provided')
     }
 
-    const validate = await isValid(post)
+    const validate = await genericValidation(post, PostModel)
     if (!validate.isValid) {
       return HttpResponse.badRequestGenericParam(validate.errors)
     }
@@ -43,7 +43,7 @@ class Post {
     if (!validator.isUUID(id)) {
       return HttpResponse.badRequest('id no has valid UUID')
     }
-    const validate = await isValid(post)
+    const validate = await genericValidation(post, PostModel)
     if (!validate.isValid) {
       return HttpResponse.badRequestGenericParam(validate.errors)
     }
