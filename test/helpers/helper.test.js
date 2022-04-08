@@ -73,8 +73,9 @@ describe('Ensure works of TokenValidator', () => {
 
 describe('TEST Database Connection', () => {
   let sec
+  const dbType = 'development'
   beforeAll(async () => {
-    sec = require('../../src/database')('production')
+    sec = require('../../src/database')(dbType)
   })
   afterAll(async () => {
     sec.close()

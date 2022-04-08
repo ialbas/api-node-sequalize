@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize')
-const config = require('../database/config/configDefault.json')
+const config = require('../database/config/config.json')
 const Post = require('./models/Post')
 
 const newConn = (type) => {

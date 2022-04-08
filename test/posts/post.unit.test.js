@@ -4,8 +4,9 @@ const httpRequest = require('./httpRequest.json')
 describe.only('PostUseCase - CREATE POST CORRECLY', () => {
   let connect = null
   let sequelize
+  const dbType = 'development'
   beforeAll(async () => {
-    sequelize = require('../../src/database')('production')
+    sequelize = require('../../src/database')(dbType)
     try {
       await sequelize.authenticate()
       connect = true
@@ -15,7 +16,7 @@ describe.only('PostUseCase - CREATE POST CORRECLY', () => {
     }
   })
   afterAll(async () => {
-    require('../../src/database')('production').close()
+    require('../../src/database')(dbType).close()
   })
   let defaulReturn
   let id
