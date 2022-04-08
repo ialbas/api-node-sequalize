@@ -29,6 +29,14 @@
         "description": "More details",
         "url": "https://github.com/ialbas/api-node-sequalize"
       }
+    },
+    {
+      "name": "User",
+      "description": "Users endpoits of the application",
+      "externalDocs": {
+        "description": "More details",
+        "url": "https://github.com/ialbas/api-node-sequalize"
+      }
     }
   ],
   "paths": {
@@ -189,6 +197,202 @@
           }
         ]
       }
+    },
+    "/api/users": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "description": "Get All EndPoint",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Required number of page",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "Required number of size",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {},
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Create",
+        "parameters": [],
+        "responses": {},
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Create a new user",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddUser"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/users/{id}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "description": "Get By ID EndPoint",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {},
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "description": "Update EndPoint",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {},
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Update a user",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUser"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "description": "Remove EndPoint",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {},
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/api/users-email/{email}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "description": "Get By User Email EndPoint",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {},
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ]
+      }
+    },
+    "/api/users-change-password/{email}": {
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "description": "Update User Password",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {},
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "description": "Update a user password",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserChangePassword"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -209,6 +413,37 @@
             "example": "any_valid_description"
           },
           "tags": {
+            "type": "array",
+            "example": [
+              "valid_one",
+              "valid_two"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "fea2ce02-4417-4453-83d6-a919990610a8"
+          },
+          "name": {
+            "type": "string",
+            "example": "any_email"
+          },
+          "email": {
+            "type": "string",
+            "example": "any_email@mail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "any_password"
+          },
+          "roles": {
             "type": "array",
             "example": [
               "valid_one",
@@ -243,16 +478,75 @@
           }
         }
       },
+      "AddUser": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "any_email"
+          },
+          "email": {
+            "type": "string",
+            "example": "any_email@mail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "any_password"
+          },
+          "roles": {
+            "type": "array",
+            "example": [
+              "valid_one",
+              "valid_two"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "UpdateUser": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "any_email"
+          },
+          "roles": {
+            "type": "array",
+            "example": [
+              "valid_one",
+              "valid_two"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "UserChangePassword": {
+        "type": "object",
+        "properties": {
+          "oldPassword": {
+            "type": "string",
+            "example": "your_old_password"
+          },
+          "newPassword": {
+            "type": "string",
+            "example": "any_new_password"
+          }
+        }
+      },
       "Login": {
         "type": "object",
         "properties": {
           "email": {
             "type": "string",
-            "example": "any_valid_email@email.com"
+            "example": "any_email@mail.com"
           },
           "password": {
             "type": "string",
-            "example": "any_valid_password"
+            "example": "any_password"
           }
         }
       }

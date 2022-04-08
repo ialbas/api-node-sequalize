@@ -1,16 +1,85 @@
-const loadedCredencials = {
-  _id: '3603928c-3785-4338-b5dd-447dca646b21',
-  email: 'any_email@mail.com',
-  password: '$2a$10$uZBy1bHarJKFQAgfV62A9O1mszHMHfpJQqqGpySFvjkmF7aILcCRm' // any_password
-}
+const { Model, DataTypes } = require('sequelize')
 
-class User {
-  async getUserByEmail (email) {
-    this.email = email
-    if (email === loadedCredencials.email) {
-      return loadedCredencials
-    }
-    return null
+const definitions = {
+  name: {
+    min: 4,
+    max: 100
+  },
+  email: {
+    min: 6,
+    max: 100
+  },
+  password: {
+    min: 6,
+    max: 20
+  }
+}
+class User extends Model {
+  static init (sequelize) {
+    super.init(
+      {
+        name: {
+          type: DataTypes.STRING,
+          allowNull: false,
+          validate: {
+            notNull: {
+              msg: '`name` is required'
+            },
+            isLength: {
+              min: definitions.name.min,
+              max: definitions.name.max,
+              msg: `name has to be between ${definitions.name.min} and ${definitions.name.max} characters long`
+            }
+          }
+        },
+        email: {
+          type: DataTypes.TEXT,
+          allowNull: false,
+          unique: true,
+          validate: {
+            notNull: {
+              msg: '`email` is required'
+            },
+            isLength: {
+              min: definitions.email.min,
+              max: definitions.email.max,
+              msg: `email has to be between ${definitions.email.min} and ${definitions.email.max} characters long`
+            }
+          }
+        },
+        password: {
+          type: DataTypes.STRING,
+          allowNull: false,
+          validate: {
+            notNull: {
+              msg: '`password` is required'
+            }
+          }
+        },
+        roles: {
+          type: DataTypes.JSON,
+          allowNull: true,
+          validate: {
+            notContains: {
+              args: ['invalid_role', 'invalid_role_outher'],
+              msg: 'There are  any invalid role'
+            },
+            customTagValidate (roles) {
+              if (roles) {
+                if (!Array.isArray(roles)) {
+                  throw new Error('the field `roles` has malformed, only array is allowed')
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        sequelize,
+        validate: {
+
+        }
+      })
   }
 }
 

@@ -25,6 +25,14 @@ const doc = {
         description: 'More details',
         url: 'https://github.com/ialbas/api-node-sequalize'
       }
+    },
+    {
+      name: 'User',
+      description: 'Users endpoits of the application',
+      externalDocs: {
+        description: 'More details',
+        url: 'https://github.com/ialbas/api-node-sequalize'
+      }
     }
   ],
   securityDefinitions: {
@@ -42,14 +50,35 @@ const doc = {
       description: 'any_valid_description',
       tags: ['valid_one', 'valid_two']
     },
+    User: {
+      id: 'fea2ce02-4417-4453-83d6-a919990610a8',
+      name: 'any_email',
+      email: 'any_email@mail.com',
+      password: 'any_password',
+      roles: ['valid_one', 'valid_two']
+    },
     AddPost: {
       title: 'any_title',
       description: 'any_valid_description',
       tags: ['valid_one', 'valid_two']
     },
+    AddUser: {
+      name: 'any_email',
+      email: 'any_email@mail.com',
+      password: 'any_password',
+      roles: ['valid_one', 'valid_two']
+    },
+    UpdateUser: {
+      name: 'any_email',
+      roles: ['valid_one', 'valid_two']
+    },
+    UserChangePassword: {
+      oldPassword: 'your_old_password',
+      newPassword: 'any_new_password'
+    },
     Login: {
-      email: 'any_valid_email@email.com',
-      password: 'any_valid_password'
+      email: 'any_email@mail.com',
+      password: 'any_password'
     }
   }
 }
