@@ -53,12 +53,30 @@ class Post {
       if (!find) {
         return HttpResponse.notFound(`the resource '${id}' not found`)
       }
-      const result = await PostModel.create(post)
+
+      const where = { where: { id } }
+      const findOne = await PostModel.findOne(where)
+
+      if (post.title) findOne.title = post.title
+      if (post.decription) findOne.roles = post.decription
+
+      const nObj = {
+        title: findOne.title,
+        description: findOne.description,
+        tags: !post.tags ? JSON.parse(findOne.tags) : post.tags
+      }
+
+      const validate = await genericValidation(nObj, PostModel)
+      if (!validate.isValid) {
+        return HttpResponse.badRequestGenericParam(validate.errors)
+      }
+
+      const result = await findOne.save()
       return HttpResponse.ok({
         id: result.id,
         title: result.title,
-        description: result.description,
-        tags: JSON.parse(result.tags),
+        desription: result.description,
+        tags: !post.tags ? JSON.parse(result.tags) : result.tags,
         created_at: result.createdAt,
         updated_at: result.updatedAt
       })
