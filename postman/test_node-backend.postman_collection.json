@@ -1,9 +1,10 @@
 {
+	"variables": [],
 	"info": {
-		"_postman_id": "1fdd1a9a-6aa4-407d-b6a0-c1de84b85c65",
 		"name": "test_node-seriquelize-backend",
+		"_postman_id": "df1c10fc-6768-45f5-ad11-71457bc59f9c",
 		"description": "A simple project example with node and test",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
 		{
@@ -12,18 +13,19 @@
 				{
 					"listen": "test",
 					"script": {
+						"type": "text/javascript",
 						"exec": [
 							"// Using Postman v9.14.0",
-							"// This script set environment to access token.",							
+							"// This script set environment to access token.",
 							"var jsonData = JSON.parse(responseBody);",
 							"var accessToken = jsonData[\"data\"][\"accessToken\"]",
 							"postman.setGlobalVariable(\"accessToken\", `Bearer ${accessToken}`);"
-						],
-						"type": "text/javascript"
+						]
 					}
 				}
 			],
 			"request": {
+				"url": "{{base_url_test_node_backend}}/api/auth/login",
 				"method": "POST",
 				"header": [
 					{
@@ -35,23 +37,14 @@
 					"mode": "raw",
 					"raw": "{\n\t\"email\":\"any_email@mail.com\",\n\t\"password\": \"any_password\"\n}"
 				},
-				"url": {
-					"raw": "{{base_url_test_node_backend}}/api/auth/login",
-					"host": [
-						"{{base_url_test_node_backend}}"
-					],
-					"path": [
-						"api",
-						"auth",
-						"login"
-					]
-				},
 				"description": "Login route"
 			},
 			"response": [
 				{
+					"id": "3d319240-0f50-4681-a05e-d55d8340b30d",
 					"name": "Login Authorization",
 					"originalRequest": {
+						"url": "{{base_url_test_node_backend}}/api/auth/login",
 						"method": "POST",
 						"header": [
 							{
@@ -64,21 +57,12 @@
 							"mode": "raw",
 							"raw": "{\n\t\"email\":\"any_email@mail.com\",\n\t\"password\": \"any_password\"\n}"
 						},
-						"url": {
-							"raw": "{{base_url_test_node_backend}}/api/auth/login",
-							"host": [
-								"{{base_url_test_node_backend}}"
-							],
-							"path": [
-								"api",
-								"auth",
-								"login"
-							]
-						}
+						"description": ""
 					},
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "access-control-allow-origin",
@@ -140,6 +124,7 @@
 				{
 					"listen": "test",
 					"script": {
+						"type": "text/javascript",
 						"exec": [
 							"// Using Postman v9.14.0",
 							"// Set environment param _id",
@@ -149,23 +134,11 @@
 							"    postman.setGlobalVariable(`_id_${i}`, jsonData[\"data\"][\"data\"][\"docs\"][i][\"_id\"]);",
 							"}",
 							""
-						],
-						"type": "text/javascript"
+						]
 					}
 				}
 			],
 			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					},
-					{
-						"key": "Authorization",
-						"value": "{{accessToken}}"
-					}
-				],
 				"url": {
 					"raw": "{{base_url_test_node_backend}}/api/posts?page=1&size=10",
 					"host": [
@@ -184,25 +157,31 @@
 							"key": "size",
 							"value": "10"
 						}
-					]
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{accessToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
 				},
 				"description": "Get a list of posts"
 			},
 			"response": [
 				{
+					"id": "91782963-591c-45e6-8dbc-4921e3b9e368",
 					"name": "Get All Posts with Pagination",
 					"originalRequest": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							},
-							{
-								"key": "Authorization",
-								"value": "{{accessToken}}"
-							}
-						],
 						"url": {
 							"raw": "{{base_url_test_node_backend}}/api/posts?page=1&size=10",
 							"host": [
@@ -221,12 +200,30 @@
 									"key": "size",
 									"value": "10"
 								}
-							]
-						}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
 					},
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "access-control-allow-origin",
@@ -283,19 +280,9 @@
 			]
 		},
 		{
-			"name": "Get By Id",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
+			"name": "Get Post By Id",
 			"request": {
+				"url": "{{base_url_test_node_backend}}/api/posts/{{_id_0}}",
 				"method": "GET",
 				"header": [
 					{
@@ -307,16 +294,9 @@
 						"value": "{{accessToken}}"
 					}
 				],
-				"url": {
-					"raw": "{{base_url_test_node_backend}}/api/posts/{{_id_0}}",
-					"host": [
-						"{{base_url_test_node_backend}}"
-					],
-					"path": [
-						"api",
-						"posts",
-						"{{_id_0}}"
-					]
+				"body": {
+					"mode": "raw",
+					"raw": ""
 				},
 				"description": "Get one Post by ID"
 			},
@@ -325,6 +305,7 @@
 		{
 			"name": "Update Post",
 			"request": {
+				"url": "{{base_url_test_node_backend}}/api/posts/{{_id_1}}",
 				"method": "PUT",
 				"header": [
 					{
@@ -340,23 +321,14 @@
 					"mode": "raw",
 					"raw": "{\n\t\"title\": \"update post\",\n\t\"body\": \"update body content\",\n\t\"tags\": [\"valid_tag_one\", \"valid_tag_two\", \"valid_tag_three\"]\n}"
 				},
-				"url": {
-					"raw": "{{base_url_test_node_backend}}/api/posts/{{_id_1}}",
-					"host": [
-						"{{base_url_test_node_backend}}"
-					],
-					"path": [
-						"api",
-						"posts",
-						"{{_id_1}}"
-					]
-				},
 				"description": "Update one post using ID"
 			},
 			"response": [
 				{
+					"id": "ed68d41e-0b48-4177-bd78-e56b887abaca",
 					"name": "Update Post",
 					"originalRequest": {
+						"url": "{{base_url_test_node_backend}}/api/posts/{{_id_1}}",
 						"method": "PUT",
 						"header": [
 							{
@@ -372,21 +344,12 @@
 							"mode": "raw",
 							"raw": "{\n\t\"title\": \"update post\",\n\t\"body\": \"update body\",\n\t\"tags\": [\"valid_tag_one\", \"valid_tag_two\", \"valid_tag_three\"]\n}"
 						},
-						"url": {
-							"raw": "{{base_url_test_node_backend}}/api/posts/{{_id_1}}",
-							"host": [
-								"{{base_url_test_node_backend}}"
-							],
-							"path": [
-								"api",
-								"posts",
-								"{{_id_1}}"
-							]
-						}
+						"description": ""
 					},
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "access-control-allow-origin",
@@ -445,37 +408,32 @@
 		{
 			"name": "Create Post",
 			"request": {
+				"url": "{{base_url_test_node_backend}}/api/posts",
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json"
+						"value": "application/json",
+						"description": ""
 					},
 					{
 						"key": "Authorization",
-						"value": "{{accessToken}}"
+						"value": "{{accessToken}}",
+						"description": ""
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"title\": \"create a new text\",\n    \"body\": \"create a new body\",\n    \"tags\": [\"valid_tag_one\", \"valid_tag_two\", \"valid_tag_three\"]\n}"
-				},
-				"url": {
-					"raw": "{{base_url_test_node_backend}}/api/posts",
-					"host": [
-						"{{base_url_test_node_backend}}"
-					],
-					"path": [
-						"api",
-						"posts"
-					]
+					"raw": "{\n\t\"email\":\"any_email@mail.com\",\n\t\"password\": \"any_password\",\n    \"roles\": [\"valid_role_one\", \"valid_role_two\", \"valid_role_three\"]\n}"
 				},
 				"description": "Create a new Post"
 			},
 			"response": [
 				{
+					"id": "9ce43219-2cfa-40f5-a76b-06969ad432d5",
 					"name": "Create Post",
 					"originalRequest": {
+						"url": "{{base_url_test_node_backend}}/api/posts",
 						"method": "POST",
 						"header": [
 							{
@@ -493,20 +451,12 @@
 							"mode": "raw",
 							"raw": "{\n\t\"title\": \"create a new text\",\n    \"body\": \"create a new body\",\n    \"tags\": [\"valid_tag_one\", \"valid_tag_two\", \"valid_tag_three\"]\n}"
 						},
-						"url": {
-							"raw": "{{base_url_test_node_backend}}/api/posts",
-							"host": [
-								"{{base_url_test_node_backend}}"
-							],
-							"path": [
-								"api",
-								"posts"
-							]
-						}
+						"description": ""
 					},
 					"status": "Created",
 					"code": 201,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "access-control-allow-origin",
@@ -563,19 +513,9 @@
 			]
 		},
 		{
-			"name": "Delete",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
+			"name": "Delete Post By ID",
 			"request": {
+				"url": "{{base_url_test_node_backend}}/api/posts/{{_id_3}}",
 				"method": "DELETE",
 				"header": [
 					{
@@ -591,23 +531,14 @@
 					"mode": "raw",
 					"raw": ""
 				},
-				"url": {
-					"raw": "{{base_url_test_node_backend}}/api/posts/{{_id_3}}",
-					"host": [
-						"{{base_url_test_node_backend}}"
-					],
-					"path": [
-						"api",
-						"posts",
-						"{{_id_3}}"
-					]
-				},
 				"description": "Delete one Post by ID"
 			},
 			"response": [
 				{
+					"id": "96bff629-4f5c-4a76-a46d-3f910f626657",
 					"name": "Delete",
 					"originalRequest": {
+						"url": "{{base_url_test_node_backend}}/api/posts/{{_id_3}}",
 						"method": "DELETE",
 						"header": [
 							{
@@ -623,21 +554,12 @@
 							"mode": "raw",
 							"raw": ""
 						},
-						"url": {
-							"raw": "{{base_url_test_node_backend}}/api/posts/{{_id_3}}",
-							"host": [
-								"{{base_url_test_node_backend}}"
-							],
-							"path": [
-								"api",
-								"posts",
-								"{{_id_3}}"
-							]
-						}
+						"description": ""
 					},
 					"status": "OK",
 					"code": 200,
 					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
 					"header": [
 						{
 							"key": "access-control-allow-origin",
@@ -692,6 +614,449 @@
 					"body": "{\"statusCode\":200,\"description\":\"ok\",\"data\":{\"statusCode\":200,\"description\":\"ok\",\"data\":{\"deletedCount\":1}}}"
 				}
 			]
+		},
+		{
+			"name": "Get All Users with Pagination",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// Using Postman v9.14.0",
+							"// Set environment param _id",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"for(i in jsonData[\"data\"][\"data\"][\"docs\"]){",
+							"    postman.setGlobalVariable(`_id_${i}`, jsonData[\"data\"][\"data\"][\"docs\"][i][\"_id\"]);",
+							"}",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "{{base_url_test_node_backend}}/api/users?page=1&size=10",
+					"host": [
+						"{{base_url_test_node_backend}}"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "size",
+							"value": "10",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "{{accessToken}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "Get a list of users"
+			},
+			"response": []
+		},
+		{
+			"name": "Get User By Id",
+			"request": {
+				"url": "{{base_url_test_node_backend}}/api/users/{{_id_0}}",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "{{accessToken}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "Get one User by ID"
+			},
+			"response": []
+		},
+		{
+			"name": "Get User By Email",
+			"request": {
+				"url": "{{base_url_test_node_backend}}/api/users/{{_id_0}}",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "{{accessToken}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "Get one User by ID"
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"url": "{{base_url_test_node_backend}}/api/users",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "{{accessToken}}",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"any_valid_name\",\n\t\"email\":\"valid_email_test@email.com\",\n\t\"password\": \"any_password\",\n    \"roles\": [\"valid_role_one\", \"valid_role_two\", \"valid_role_three\"]\n}"
+				},
+				"description": "Create a new Post"
+			},
+			"response": [
+				{
+					"id": "c536e35d-8dcc-4700-825f-4b30a7eb8e0d",
+					"name": "Create Post",
+					"originalRequest": {
+						"url": "{{base_url_test_node_backend}}/api/posts",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"warning": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}",
+								"warning": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"create a new text\",\n    \"body\": \"create a new body\",\n    \"tags\": [\"valid_tag_one\", \"valid_tag_two\", \"valid_tag_three\"]\n}"
+						},
+						"description": ""
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"key": "access-control-allow-origin",
+							"value": "*",
+							"name": "access-control-allow-origin",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"key": "connection",
+							"value": "keep-alive",
+							"name": "connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "content-length",
+							"value": "210",
+							"name": "content-length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8",
+							"name": "content-type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "date",
+							"value": "Fri, 18 Mar 2022 00:52:09 GMT",
+							"name": "date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"d2-HCKyjvt+d0yUpBjUECucUmLM/FA\"",
+							"name": "etag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "keep-alive",
+							"value": "timeout=5",
+							"name": "keep-alive",
+							"description": "Custom header"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express",
+							"name": "x-powered-by",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookie": [],
+					"body": "{\"statusCode\":201,\"description\":\"created\",\"data\":{\"_id\":\"c87954af-77a1-46ae-8c7f-bb284be94324\",\"title\":\"create a new text\",\"body\":\"create a new body\",\"tags\":[\"valid_tag_one\",\"valid_tag_two\",\"valid_tag_three\"]}}"
+				}
+			]
+		},
+		{
+			"name": "Update User",
+			"request": {
+				"url": "{{base_url_test_node_backend}}/api/posts/{{_id_1}}",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{accessToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"update post\",\n\t\"body\": \"update body content\",\n\t\"tags\": [\"valid_tag_one\", \"valid_tag_two\", \"valid_tag_three\"]\n}"
+				},
+				"description": "Update one post using ID"
+			},
+			"response": [
+				{
+					"id": "3d11aaf2-0fab-4be8-85cc-4351069eb463",
+					"name": "Update Post",
+					"originalRequest": {
+						"url": "{{base_url_test_node_backend}}/api/posts/{{_id_1}}",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"update post\",\n\t\"body\": \"update body\",\n\t\"tags\": [\"valid_tag_one\", \"valid_tag_two\", \"valid_tag_three\"]\n}"
+						},
+						"description": ""
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"key": "access-control-allow-origin",
+							"value": "*",
+							"name": "access-control-allow-origin",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"key": "connection",
+							"value": "keep-alive",
+							"name": "connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "content-length",
+							"value": "195",
+							"name": "content-length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8",
+							"name": "content-type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "date",
+							"value": "Fri, 18 Mar 2022 00:35:59 GMT",
+							"name": "date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"c3-eh3Q+Dpot25k3RKyJJvL7QnarKk\"",
+							"name": "etag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "keep-alive",
+							"value": "timeout=5",
+							"name": "keep-alive",
+							"description": "Custom header"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express",
+							"name": "x-powered-by",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookie": [],
+					"body": "{\"statusCode\":200,\"description\":\"ok\",\"data\":[{\"_id\":\"7ad8b353-98fb-41fb-85c7-dd83f26218f5\",\"title\":\"update post\",\"body\":\"update body\",\"tags\":[\"valid_tag_one\",\"valid_tag_two\",\"valid_tag_three\"]}]}"
+				}
+			]
+		},
+		{
+			"name": "Delete User By ID",
+			"request": {
+				"url": "{{base_url_test_node_backend}}/api/posts/{{_id_3}}",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{accessToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": "Delete one Post by ID"
+			},
+			"response": [
+				{
+					"id": "7f309e5d-0772-4fb9-b60d-301d84ebc556",
+					"name": "Delete",
+					"originalRequest": {
+						"url": "{{base_url_test_node_backend}}/api/posts/{{_id_3}}",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{accessToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "html",
+					"header": [
+						{
+							"key": "access-control-allow-origin",
+							"value": "*",
+							"name": "access-control-allow-origin",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"key": "connection",
+							"value": "keep-alive",
+							"name": "connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "content-length",
+							"value": "108",
+							"name": "content-length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json; charset=utf-8",
+							"name": "content-type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "date",
+							"value": "Fri, 18 Mar 2022 00:53:37 GMT",
+							"name": "date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "etag",
+							"value": "W/\"6c-abofpBngPeCSuMJt0H7Ioj3am9k\"",
+							"name": "etag",
+							"description": "An identifier for a specific version of a resource, often a message digest"
+						},
+						{
+							"key": "keep-alive",
+							"value": "timeout=5",
+							"name": "keep-alive",
+							"description": "Custom header"
+						},
+						{
+							"key": "x-powered-by",
+							"value": "Express",
+							"name": "x-powered-by",
+							"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+						}
+					],
+					"cookie": [],
+					"body": "{\"statusCode\":200,\"description\":\"ok\",\"data\":{\"statusCode\":200,\"description\":\"ok\",\"data\":{\"deletedCount\":1}}}"
+				}
+			]
+		},
+		{
+			"name": "Get User By Email",
+			"request": {
+				"url": "{{base_url_test_node_backend}}/api/users-email/email@email.com",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "{{accessToken}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "Get one User by Email"
+			},
+			"response": []
 		}
 	]
 }

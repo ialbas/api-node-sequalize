@@ -1,5 +1,5 @@
 {
-  "id": "654c39cb-0e02-423d-8413-544f84db56f9",
+  "id": "98cad149-fc0e-fcf6-812f-c8208792bcd4",
   "name": "TEST_NODE_SERIQ_BACKEND",
   "values": [
     {
@@ -99,8 +99,8 @@
       "type": "text"
     }
   ],
-  "timestamp": 1647885674851,
+  "timestamp": 1649768399674,
   "_postman_variable_scope": "environment",
-  "_postman_exported_at": "2022-03-00T00:00:30.477Z",
+  "_postman_exported_at": "2022-04-12T17:19:31.491Z",
   "_postman_exported_using": "Postman/5.5.5"
 }
