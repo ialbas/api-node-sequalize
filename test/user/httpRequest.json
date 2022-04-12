@@ -1,0 +1,66 @@
+{
+  "ok": {
+    "name": "any_name_provided",
+    "email": "any_email_test@email.com",
+    "password": "any_hashed_password"
+  },
+  "empty": {},
+  "--name": {
+    "email": "any_email_test@email.com",
+    "password": "any_hashed_password"
+  },
+  "--password": {
+    "name": "any_hashed_password",
+    "email": "any_email_test@email.com"
+  },
+  "short-name": {
+    "name": "",
+    "email": "any_email_test@email.com",
+    "password": "any_hashed_password"
+  },
+  "long-name": {
+    "name": "long name long name long name long name long name long name long name long name long name long name long name long name long name long name long name long name long name long name long name long name long name long name long name long name long name long name long name long name long name long name long name long name long name long name ",
+    "email": "any_email_test@email.com",
+    "password": "any_hashed_password"
+  },
+  "--email": {
+    "name": "any_name_provided",
+    "password": "any_hashed_password"
+  },
+  "short-email": {
+    "name": "any_name_provided",
+    "email": "",
+    "password": "any_hashed_password"
+  },
+  "long-email": {
+    "name": "any_name_provided",
+    "email": "any_email_testany_email_testany_email_testany_email_testany_email_testany_email_testany_email_testany_email_testany_email_testany_email_testany_email_testany_email_testany_email_testany_email_testany_email_testany_email_testany_email_testany_email_testany_email_testany_email_testany_email_testany_email_testany_email_testany_email_testany_email_testany_email_testany_email_testany_email_testany_email_testany_email_testany_email_test@email.com",
+    "password": "any_hashed_password"
+  },
+  "invalid-role": {
+    "name": "any_name_provided",
+    "email": "any_email_test@email.com",
+    "password": "any_hashed_password",
+    "roles": [
+      "valid_role_one",
+      "valid_role_two",
+      "invalid_role"
+    ]
+  },
+  "valid-role": {
+    "name": "any_name_provided",
+    "email": "any_email_test@email.com",
+    "password": "any_hashed_password",
+    "roles": [
+      "valid_role_one",
+      "valid_role_two",
+      "valid_role_three"
+    ]
+  },
+  "malformed-role": {
+    "name": "any_name_provided",
+    "email": "any_email_test@email.com",
+    "password": "any_hashed_password",
+    "roles": "valid_role_one, valid_role_two, valid_role_three"
+  }
+}

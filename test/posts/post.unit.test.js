@@ -1,7 +1,7 @@
 const PostRouter = require('../../src/controllers/post/index')
 const httpRequest = require('./httpRequest.json')
 
-describe.only('PostUseCase - CREATE POST CORRECLY', () => {
+describe('PostUseCase - CREATE POST CORRECLY', () => {
   let connect = null
   let sequelize
   const dbType = 'development'

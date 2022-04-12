@@ -18,6 +18,10 @@ class User {
     if (!user.password) {
       return HttpResponse.badRequest('password is required')
     }
+    if (!user.email) {
+      return HttpResponse.badRequest('email is required')
+    }
+
     const hashedPassword = await bcrypt.hash(user.password, 10)
     user.password = hashedPassword
     const emailExist = await this.getUserByEmail(user.email)
@@ -55,6 +59,11 @@ class User {
 
     if (!validator.isUUID(id)) {
       return HttpResponse.badRequest('id no has valid UUID')
+    }
+    user.password = 'any_password'
+    const validate = await genericValidation(user, UserModel)
+    if (!validate.isValid) {
+      return HttpResponse.badRequestGenericParam(validate.errors)
     }
 
     try {

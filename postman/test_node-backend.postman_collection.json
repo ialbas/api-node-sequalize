@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "1fdd1a9a-6aa4-407d-b6a0-c1de84b85c65",
-		"name": "test_node-backend",
+		"name": "test_node-seriquelize-backend",
 		"description": "A simple project example with node and test",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
